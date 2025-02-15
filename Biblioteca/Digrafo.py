@@ -114,21 +114,21 @@ class Digrafo:
         pais = [0] * self.num_vertices() # inicializa a lista de pais
         pais[vertice - 1] = vertice # define a origem como pai dela mesma
         
-        for i in range(self.num_vertices()):
+        for i in range(self.num_vertices()-1):
             for valor in self.lista_de_adjacencia[i + 1]: # percorre os vizinhos de cada vertice
                 u, v, p = i + 1, valor[0], valor[1]
-                if dist[u-1] != float("Inf") and dist[u-1] + p <= dist[v-1]: # confere quem tem a menor distância
+                if dist[u-1] != float("Inf") and dist[u-1] + p < dist[v-1]: # confere quem tem a menor distância
                     dist[v-1] = dist[u-1] + p # atualiza a distância
                     vertices[v-1] = v 
                     pais[v-1] = u # atualiza o pai
         
         i = 0
-        for valor in self.lista_de_adjacencia[i + 1]: 
-            u, v, p = i + 1, valor[0], valor[1]
-            i = i + 1
-            if dist[u-1] != float("Inf") and dist[u-1] + p < dist[v-1]: # confere se tem ciclo negativo no grafo
-                print("Grafo contém ciclo negativo.")
-                return
+        for u in range(1, self.num_vertices() + 1):
+    for valor in self.lista_de_adjacencia[u]:
+        v, p = valor[0], valor[1]
+        if dist[u-1] + p < dist[v-1]: # confere se tem ciclo negativo no grafo
+            print("Grafo contém ciclo negativo.")
+            return
  
         return vertices, dist, pais
     
