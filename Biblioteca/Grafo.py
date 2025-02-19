@@ -48,12 +48,12 @@ class Grafo:
             l.append(len(self.lista_de_adjacencia[k]))
         return max(l)
     
-    def bfs(self,v):
+    def bfs(self,vertice):
         visitados = set()
-        visitados.add(v)
-        distancia = {v : 0}
-        pais = [(v,v)]
-        fila = [v]
+        visitados.add(vertice)
+        distancia = {vertice : 0}
+        pais = [(vertice,vertice)]
+        fila = [vertice]
         while len(visitados) != len(self.lista_de_adjacencia):
             for n in range(len(self.lista_de_adjacencia[fila[0]])):
                 if self.lista_de_adjacencia[fila[0]][n][0] not in visitados:
