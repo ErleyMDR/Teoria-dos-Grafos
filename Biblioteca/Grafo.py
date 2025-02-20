@@ -11,6 +11,7 @@ class Grafo:
         self.add_vertice(v)
         self.add_vertice(u)
         self.lista_de_adjacencia[v].append((u,p))
+        
     
     def num_vertices(self):
         return len(self.lista_de_adjacencia)
@@ -48,12 +49,12 @@ class Grafo:
             l.append(len(self.lista_de_adjacencia[k]))
         return max(l)
     
-    def bfs(self,vertice):
+    def bfs(self,v):
         visitados = set()
-        visitados.add(vertice)
-        distancia = {vertice : 0}
-        pais = [(vertice,vertice)]
-        fila = [vertice]
+        visitados.add(v)
+        distancia = {v : 0}
+        pais = [(v,v)]
+        fila = [v]
         while len(visitados) != len(self.lista_de_adjacencia):
             for n in range(len(self.lista_de_adjacencia[fila[0]])):
                 if self.lista_de_adjacencia[fila[0]][n][0] not in visitados:
@@ -124,7 +125,7 @@ class Grafo:
             if dist[u-1] != float("Inf") and dist[u-1] + p < dist[v-1]: # confere se tem ciclo negativo no grafo
                 print("Grafo contém ciclo negativo.")
                 return
- 
+
         return vertices, dist, pais
     
     def dijkstra(self, vertice):
